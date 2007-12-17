@@ -11,7 +11,8 @@ License:	GPL
 Group:		Networking/WWW
 URL:		http://nagvis.org
 Source:     http://garr.dl.sourceforge.net/sourceforge/nagvis/%{name}-%{version}%{beta}.tar.gz
-Patch:      %{name}-1.2rc1-fhs.patch
+Patch0:      %{name}-1.2rc1-fhs.patch
+Patch1:      %{name}-1.2rc1-allow-empty-prefix.patch
 Requires:   mod_php
 Requires:   php-xml
 Requires:   php-gd
@@ -31,7 +32,8 @@ processes like a mail system or a network infrastructure.
 
 %prep
 %setup -q -n %{name}-%{version}%{beta}
-%patch -p 1
+%patch0 -p 1
+%patch1 -p 1
 
 %build
 
