@@ -1,6 +1,6 @@
 %define name	nagvis
-%define version 1.2
-%define release %mkrel 1 
+%define version 1.2.1
+%define release %mkrel 1
 
 Name:		%{name}
 Version:	%{version}
@@ -10,7 +10,7 @@ License:	GPL
 Group:		Networking/WWW
 URL:		http://nagvis.org
 Source:     http://garr.dl.sourceforge.net/sourceforge/nagvis/%{name}-%{version}.tar.gz
-Patch0:      %{name}-1.2-fhs.patch
+Patch0:      %{name}-1.2.1-fhs.patch
 Patch1:      %{name}-1.2rc1-allow-empty-prefix.patch
 Requires:   mod_php
 Requires:   php-xml
