@@ -1,5 +1,5 @@
 %define name	nagvis
-%define version 1.2.1
+%define version 1.2.2
 %define release %mkrel 1
 
 Name:		%{name}
@@ -9,9 +9,9 @@ Summary:	Visualization addon for nagios
 License:	GPL
 Group:		Networking/WWW
 URL:		http://nagvis.org
-Source:     http://garr.dl.sourceforge.net/sourceforge/nagvis/%{name}-%{version}.tar.gz
-Patch0:      %{name}-1.2.1-fhs.patch
-Patch1:      %{name}-1.2rc1-allow-empty-prefix.patch
+Source:     http://downloads.sourceforge.net/nagvis/%{name}-%{version}.tar.gz
+Patch0:     %{name}-1.2.2-fhs.patch
+Patch1:     %{name}-1.2rc1-allow-empty-prefix.patch
 Requires:   mod_php
 Requires:   php-xml
 Requires:   php-gd
