@@ -1,6 +1,6 @@
 %define name	nagvis
-%define version 1.3.1
-%define release %mkrel 3
+%define version 1.3.2
+%define release %mkrel 1
 
 Name:		%{name}
 Version:	%{version}
@@ -10,7 +10,6 @@ License:	GPL
 Group:		Networking/WWW
 URL:		http://nagvis.org
 Source:     http://downloads.sourceforge.net/nagvis/%{name}-%{version}.tar.gz
-Patch:      %{name}-1.3.1-fix-noprefix.patch
 Requires:   mod_php
 Requires:   php-xml
 Requires:   php-gd
@@ -31,7 +30,6 @@ processes like a mail system or a network infrastructure.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch -p 1
 
 %build
 
