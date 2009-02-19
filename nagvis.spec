@@ -1,6 +1,6 @@
 %define name	nagvis
 %define version 1.3.2
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -91,7 +91,7 @@ EOF
 
 # nagvis configuration
 perl -pi \
-    -e 's|;base=.*|base="%{_var}/www/nagvis"|;' \
+    -e 's|;base=.*|base="%{_var}/www/nagvis/"|;' \
     -e 's|;htmlbase=.*|htmlbase="/nagvis"|;' \
     %{buildroot}%{_sysconfdir}/%{name}/nagvis.ini.php 
 
