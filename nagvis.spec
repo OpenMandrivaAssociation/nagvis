@@ -1,6 +1,6 @@
 %define name	nagvis
-%define version 1.3.2
-%define release %mkrel 2
+%define version 1.4.1
+%define release %mkrel 1
 
 Name:		%{name}
 Version:	%{version}
@@ -36,49 +36,53 @@ processes like a mail system or a network infrastructure.
 %install
 rm -rf %{buildroot}
 
-install -d -m 755 %{buildroot}%{_var}/www/%{name}
-install -d -m 755 %{buildroot}%{_var}/www/%{name}
-install -m 644 index.php %{buildroot}%{_var}/www/%{name}
-cp -r nagvis %{buildroot}%{_var}/www/%{name}
-cp -r wui %{buildroot}%{_var}/www/%{name}
-
 install -d -m 755 %{buildroot}%{_datadir}/%{name}
+
+install -d -m 755 %{buildroot}%{_datadir}/%{name}/www
+install -m 644 index.php %{buildroot}%{_datadir}/%{name}/www
+cp -r nagvis %{buildroot}%{_datadir}/%{name}/www
+cp -r wui %{buildroot}%{_datadir}/%{name}/www
+
 install -d -m 755 %{buildroot}%{_datadir}/%{name}/includes/defines
 install -d -m 755 %{buildroot}%{_datadir}/%{name}/includes/classes
 install -d -m 755 %{buildroot}%{_datadir}/%{name}/includes/languages
 install -d -m 755 %{buildroot}%{_datadir}/%{name}/includes/functions
-pushd %{buildroot}%{_var}/www/%{name}/nagvis/includes
-for dir in defines classes languages functions; do
-    mv $dir/* ../../../../..%{_datadir}/%{name}/includes/$dir
+pushd %{buildroot}%{_datadir}/%{name}/www/nagvis/includes
+for dir in defines classes functions; do
+    mv $dir/* ../../../includes/$dir
     rmdir $dir
-    ln -s ../../../../..%{_datadir}/%{name}/includes/$dir .
+    ln -s ../../../includes/$dir .
 done
 popd
 
-pushd %{buildroot}%{_var}/www/%{name}/wui/includes
+pushd %{buildroot}%{_datadir}/%{name}/www/wui/includes
 for dir in classes functions; do
-    mv $dir/* ../../../../..%{_datadir}/%{name}/includes/$dir
+    mv $dir/* ../../../includes/$dir
     rmdir $dir
-    ln -s ../../../../..%{_datadir}/%{name}/includes/$dir .
+    ln -s ../../../includes/$dir .
 done
 popd
 
 install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}
-(cd %{buildroot}%{_var}/www/%{name} && ln -s ../../..%{_sysconfdir}/%{name} etc)
+pushd %{buildroot}%{_datadir}/%{name}/www 
+ln -s ../../../..%{_sysconfdir}/%{name} etc
+popd
 install -m 644 etc/nagvis.ini.php-sample %{buildroot}%{_sysconfdir}/%{name}/nagvis.ini.php
 cp -r etc/maps %{buildroot}%{_sysconfdir}/%{name}
 
 install -d -m 755 %{buildroot}%{_var}/lib/%{name}
-(cd %{buildroot}%{_var}/www/%{name} && ln -s ../../lib/%{name} var)
+pushd %{buildroot}%{_datadir}/%{name}/www
+ln -s ../../../..%{_var}/lib/%{name} var
+popd
 
 # apache configuration
 install -d -m 755 %{buildroot}%{_webappconfdir}
 cat > %{buildroot}%{_webappconfdir}/%{name}.conf <<EOF
 # %{name} Apache configuration
 Alias /%{name}/var %{_var}/lib/%{name}
-Alias /%{name} %{_var}/www/%{name}
+Alias /%{name} %{_datadir}/%{name}/www
 
-<Directory %{_var}/www/%{name}>
+<Directory %{_datadir}/%{name}/www>
     Allow from all
     # nagvis complains if no user is defined
     SetEnv REMOTE_USER nagios
@@ -105,8 +109,8 @@ Mandriva RPM specific notes
 setup
 -----
 The setup used here differs from default one, to achieve better FHS compliance.
-- the files accessibles from the web are in %{_var}/www/%{name}
-- the files non accessibles from the web are in %{_datadir}/%{name}
+- the files accessibles from the web are in %{_datadir}/%{name}/www
+- the files included from previous ones are in %{_datadir}/%{name}/includes
 - the generated files are in %{_var}/lib/%{name}
 - the configuration files are in %{_sysconfdir}/%{name}
 EOF
@@ -128,6 +132,5 @@ rm -rf %{buildroot}
 %dir %{_sysconfdir}/nagvis/maps
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/nagvis/nagvis.ini.php
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/nagvis/maps/*.cfg
-%{_var}/www/%{name}
 %attr(-,apache,apache) %{_var}/lib/%{name}
 %{_datadir}/%{name}
