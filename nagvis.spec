@@ -68,6 +68,8 @@ Alias /%{name} %{_datadir}/%{name}
     Deny from all
     ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
 
+    Options -FollowSymLinks
+
     # nagvis complains if no user is defined
     SetEnv REMOTE_USER nagios
 </Directory>
