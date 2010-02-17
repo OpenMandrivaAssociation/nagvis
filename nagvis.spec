@@ -1,6 +1,6 @@
 %define name	nagvis
 %define version 1.4.5
-%define release %mkrel 1
+%define release %mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -15,11 +15,10 @@ Requires:   php-xml
 Requires:   php-gd
 Requires:   php-mysql
 Requires:   php-mbstring
-# webapp macros and scriptlets
-Requires(post):		rpm-helper >= 0.16
-Requires(postun):	rpm-helper >= 0.16
-BuildRequires:	rpm-helper >= 0.16
-BuildRequires:	rpm-mandriva-setup >= 1.23
+%if %mdkversion < 201010
+Requires(post):   rpm-helper
+Requires(postun):   rpm-helper
+%endif
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
@@ -64,9 +63,7 @@ Alias /%{name} %{_datadir}/%{name}
 
 <Directory %{_datadir}/%{name}>
     Order allow,deny
-    Allow from 127.0.0.1
-    Deny from all
-    ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
+    Allow from all
 
     Options -FollowSymLinks
 
@@ -75,10 +72,8 @@ Alias /%{name} %{_datadir}/%{name}
 </Directory>
 
 <Directory %{_var}/lib/%{name}>
-    Order allow,deny
-    Allow from 127.0.0.1
+    Order deny,allow
     Deny from all
-    ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
 </Directory>
 EOF
 
@@ -107,10 +102,14 @@ EOF
 rm -rf %{buildroot}
 
 %post
+%if %mdkversion < 201010
 %_post_webapp
+%endif
 
 %postun
+%if %mdkversion < 201010
 %_postun_webapp
+%endif
 
 %files
 %defattr(-,root,root)
