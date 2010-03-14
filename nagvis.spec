@@ -1,6 +1,6 @@
 %define name	nagvis
-%define version 1.4.5
-%define release %mkrel 2
+%define version 1.4.6
+%define release %mkrel 1
 
 Name:		%{name}
 Version:	%{version}
