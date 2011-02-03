@@ -47,89 +47,106 @@ cp -r share %{buildroot}%{_datadir}/%{name}
 cp -r docs %{buildroot}%{_datadir}/%{name}/share
 
 cmp() {
-    cat $1 | sed 's#\(var\)\s*\(\S*\)\s*=\s*#\1 \2=#;s#^\s*##;s#\s*$##;s#\t+# #g' | awk '
-    BEGIN { OK=1; braces=0 }
-    {
-        # Remove /* */ one line comments
-        sub(/\/\*[^@]*\*\//,"");
-        # Remove // comments (line beginning)
-        sub(/^\/\/.*/,"");
-        
-        # Count braces
-        anz1 = gsub(/\{/,"{");
-        anz2 = gsub(/}/,"}");
-        
-        if (OK == 1) {
-            braces += anz1;
-            braces -= anz2;
-        }
-    }
-    /\/\*/ {
-        c = gsub(/\/\*[^@]*$/,"");
-        if(c > 0) {
-            OK=0;
-        }
-    }
-    /\*\/$/ {
-        c = gsub(/^[^@]*\*\//,"");
-        if(c > 0) {
-            OK=1;
-        }
-    }
-    {
-        line = $0;
-        #anz = gsub(/function/," function");
-        #ch = substr(line,length(line));
-        if (OK == 1) {
-            if (length(line) > 0) {
-                #if (ch == "}") {
-                #   if (braces == 0) {
-                #       if (length(line) > 0) {
-                #           print line
-                #       }
-                #       line = ""
-                #   }
-                #}
-                #line = line $0;
-                
-                print line;
-            }
-        }
-    }
-    ' >> $OUT
+	cat $1 | sed 's#\(var\)\s*\(\S*\)\s*=\s*#\1 \2=#;s#^\s*##;s#\s*$##;s#\t+# #g' | awk '
+	BEGIN { OK=1; braces=0 }
+	{
+		# Remove /* */ one line comments
+		sub(/\/\*[^@]*\*\//,"");
+		# Remove // comments (line beginning)
+		sub(/^\/\/.*/,"");
+		
+		# Count braces
+		anz1 = gsub(/\{/,"{");
+		anz2 = gsub(/}/,"}");
+		
+		if (OK == 1) {
+			braces += anz1;
+			braces -= anz2;
+		}
+	}
+	/\/\*/ {
+		c = gsub(/\/\*[^@]*$/,"");
+		if(c > 0) {
+			OK=0;
+		}
+	}
+	/\*\/$/ {
+		c = gsub(/^[^@]*\*\//,"");
+		if(c > 0) {
+			OK=1;
+		}
+	}
+	{
+		line = $0;
+		#anz = gsub(/function/," function");
+		#ch = substr(line,length(line));
+		if (OK == 1) {
+			if (length(line) > 0) {
+				#if (ch == "}") {
+				#	if (braces == 0) {
+				#		if (length(line) > 0) {
+				#			print line
+				#		}
+				#		line = ""
+				#	}
+				#}
+				#line = line $0;
+				
+				print line;
+			}
+		}
+	}
+	' >> $OUT
 }
 
 
 
 
 pushd %{buildroot}%{_datadir}/%{name}/share/frontend/nagvis-js/js/
-OUT=NagVisCompressed.js
-    >$OUT
-    cmp nagvis.js
-    cmp popupWindow.js
-    cmp ExtBase.js
-    cmp frontendMessage.js
-    cmp frontendEventlog.js
-    cmp hover.js
-    cmp frontendContext.js
-    cmp ajax.js
-    cmp dynfavicon.js
-    cmp frontend.js
-    cmp lines.js
-    cmp overlib.js
-    cmp NagVisObject.js
-    cmp NagVisStatefulObject.js
-    cmp NagVisStatelessObject.js
-    cmp NagVisHost.js
-    cmp NagVisService.js
-    cmp NagVisHostgroup.js
-    cmp NagVisServicegroup.js
-    cmp NagVisMap.js
-    cmp NagVisShape.js
-    cmp NagVisLine.js
-    cmp NagVisTextbox.js
-    cmp NagVisRotation.js
-    cmp wz_jsgraphics.js
+	OUT=NagVisCompressed.js
+	>$OUT
+	cmp ExtStacktrace.js
+	cmp nagvis.js
+	cmp popupWindow.js
+	cmp ExtBase.js
+	cmp frontendMessage.js
+	cmp frontendEventlog.js
+	cmp frontendHover.js
+	cmp hover.js
+	cmp frontendContext.js
+	cmp ajax.js
+	cmp dynfavicon.js
+	cmp frontend.js
+	cmp lines.js
+	cmp NagVisObject.js
+	cmp NagVisStatefulObject.js
+	cmp NagVisStatelessObject.js
+	cmp NagVisHost.js
+	cmp NagVisService.js
+	cmp NagVisHostgroup.js
+	cmp NagVisServicegroup.js
+	cmp NagVisMap.js
+	cmp NagVisShape.js
+	cmp NagVisLine.js
+	cmp NagVisTextbox.js
+	cmp NagVisRotation.js
+	cmp wz_jsgraphics.js
+popd
+
+pushd %{buildroot}%{_datadir}/%{name}/share/frontend/wui/js/
+	OUT=WuiCompressed.js
+	>$OUT
+	cmp wui.js
+	cmp ajax.js
+	cmp addmodify.js
+	cmp EditMainCfg.js
+	cmp ManageBackgrounds.js
+	cmp ManageBackends.js
+	cmp ManageMaps.js
+	cmp ManageShapes.js
+	cmp MapManageTmpl.js
+	cmp wz_jsgraphics.js
+	cmp ExtGenericResize.js
 popd
 
 install -d -m 755 %{buildroot}%{_sysconfdir}/%{name}
