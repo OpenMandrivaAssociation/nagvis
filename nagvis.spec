@@ -218,3 +218,104 @@ rm -rf %{buildroot}
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/nagvis/geomap/*.xml
 %attr(-,apache,apache) %{_var}/lib/%{name}
 %{_datadir}/%{name}
+
+
+%changelog
+* Tue Jul 05 2011 Guillaume Rousse <guillomovitch@mandriva.org> 1.5.9-1mdv2011.0
++ Revision: 688912
+- update to new version 1.5.9
+
+* Thu Mar 10 2011 Funda Wang <fwang@mandriva.org> 1.5.8-2
++ Revision: 643231
+- rebuild to obsolete old packages
+
+* Thu Feb 03 2011 Guillaume Rousse <guillomovitch@mandriva.org> 1.5.8-1
++ Revision: 635667
+- new version
+- new version
+
+* Sun Jan 23 2011 Guillaume Rousse <guillomovitch@mandriva.org> 1.5.7-1
++ Revision: 632444
+- new version
+
+* Sat Jan 01 2011 Guillaume Rousse <guillomovitch@mandriva.org> 1.5.6-1mdv2011.0
++ Revision: 627040
+- update to new version 1.5.6
+
+* Mon Dec 06 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1.5.5-1mdv2011.0
++ Revision: 612527
+- new version
+
+* Fri Aug 13 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1.5.1-1mdv2011.0
++ Revision: 569472
+- new version
+- drop README.mdv, the setup is self-explaining
+
+* Mon Apr 26 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.7-1mdv2010.1
++ Revision: 538956
+- new version
+
+* Sun Mar 14 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.6-1mdv2010.1
++ Revision: 518978
+- update to new version 1.4.6
+
+* Wed Feb 17 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.5-2mdv2010.1
++ Revision: 507266
+- rely on filetrigger for reloading apache configuration begining with 2010.1, rpm-helper macros otherwise
+- switch to "open to all" default access policy
+
+* Fri Dec 04 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.5-1mdv2010.1
++ Revision: 473620
+- ensure followsymlink is always disabled
+- new version
+- don't attempt to isolate files from web root, to match upstream setup better
+- enforce new default access policy
+
+* Sat Nov 07 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.4-1mdv2010.1
++ Revision: 462214
+- update to new version 1.4.4
+
+* Sun Aug 23 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.2-1mdv2010.0
++ Revision: 419925
+- new version
+
+* Wed Jun 10 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.4.1-1mdv2010.0
++ Revision: 384878
+- new version
+- mv all files under %%_datadir/%%name, %%_var/www is not FHS compliant
+- better default configuration file
+
+* Wed Feb 18 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.3.2-1mdv2009.1
++ Revision: 342730
+- new version
+- drop additional noprefix patch, fixed upstream
+
+* Sat Sep 20 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.3.1-3mdv2009.0
++ Revision: 286172
+- new version
+- use symlinks rather than code patch to achieve FHS compliance
+- make maps and configuration apache writable
+
+* Tue Jul 29 2008 Thierry Vignaud <tv@mandriva.org> 1.2.2-3mdv2009.0
++ Revision: 253560
+- rebuild
+
+* Mon Feb 25 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.2.2-1mdv2008.1
++ Revision: 175068
+- new version
+
+* Mon Feb 11 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.2.1-1mdv2008.1
++ Revision: 165532
+- new version
+  rediff FHS patch
+
+* Tue Dec 18 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.2-1mdv2008.1
++ Revision: 132113
+- final version
+  include wui
+- patch1: allow dbprefix to be mepty
+- import nagvis
+
+
+* Fri Dec 14 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.2-0.%%{rc}.1mdv2008.1
+- first mdv release
