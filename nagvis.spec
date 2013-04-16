@@ -1,6 +1,6 @@
 %define name	nagvis
 %define version 1.5.9
-%define release: 2
+%define release: 3
 
 %define _requires_exceptions pear(\\(/var/www/.*\\|dwoo/dwooAutoload.php\\|Zend/.*\\))
 
