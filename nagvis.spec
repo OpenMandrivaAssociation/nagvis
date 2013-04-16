@@ -1,6 +1,6 @@
 %define name	nagvis
 %define version 1.5.9
-%define release %mkrel 1
+%define release: 2
 
 %define _requires_exceptions pear(\\(/var/www/.*\\|dwoo/dwooAutoload.php\\|Zend/.*\\))
 
@@ -194,15 +194,7 @@ chmod 660 %{buildroot}%{_sysconfdir}/%{name}/nagvis.ini.php
 %clean
 rm -rf %{buildroot}
 
-%post
-%if %mdkversion < 201010
-%_post_webapp
-%endif
 
-%postun
-%if %mdkversion < 201010
-%_postun_webapp
-%endif
 
 %files
 %defattr(-,root,root)
