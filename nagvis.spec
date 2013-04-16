@@ -1,12 +1,6 @@
-%define name	nagvis
-%define version 1.5.9
-%define release: 3
-
-%define _requires_exceptions pear(\\(/var/www/.*\\|dwoo/dwooAutoload.php\\|Zend/.*\\))
-
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		nagvis
+Version:	1.5.9
+Release:	3
 Summary:	Visualization addon for nagios
 License:	GPL
 Group:		Networking/WWW
@@ -22,12 +16,7 @@ Requires:   php-session
 Requires:   php-pdo_sqlite
 Requires:   php-ZendFramework
 Requires:   graphviz
-%if %mdkversion < 201010
-Requires(post):   rpm-helper
-Requires(postun):   rpm-helper
-%endif
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 NagVis is a visualization addon for the well known network managment system
