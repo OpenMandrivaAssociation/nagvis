@@ -1,6 +1,6 @@
 Name:		nagvis
 Version:	1.5.9
-Release:	3
+Release:	4
 Summary:	Visualization addon for nagios
 License:	GPL
 Group:		Networking/WWW
@@ -163,8 +163,7 @@ cat > %{buildroot}%{_webappconfdir}/%{name}.conf <<EOF
 Alias /%{name} %{_datadir}/%{name}/share
 
 <Directory %{_datadir}/%{name}/share>
-    Order allow,deny
-    Allow from all
+    Require all granted
 
     Options FollowSymLinks
 </Directory>
