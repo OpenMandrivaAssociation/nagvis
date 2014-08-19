@@ -1,6 +1,6 @@
 Name:		nagvis
 Version:	1.5.9
-Release:	4
+Release:	5
 Summary:	Visualization addon for nagios
 License:	GPL
 Group:		Networking/WWW
