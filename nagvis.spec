@@ -4,7 +4,7 @@ Release:	6
 Summary:	Visualization addon for nagios
 License:	GPL
 Group:		Networking/WWW
-URL:		http://nagvis.org
+URL:		https://nagvis.org
 Source:     http://downloads.sourceforge.net/nagvis/%{name}-%{version}.tar.gz
 Requires:   mod_php
 Requires:   php-xml
